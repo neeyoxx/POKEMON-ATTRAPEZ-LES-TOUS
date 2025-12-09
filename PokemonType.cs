@@ -1,21 +1,26 @@
+using System;
+
 namespace PokemonBattle
 {
-    public enum TypePokemon
+    public enum PokemonType
     {
-        Normal,
-        Electrique,
+        Feu,
         Eau,
         Plante,
-        Feu
+        Electrique,
+        Glace,
+        Combat,
+        Poison,
+        Sol,
+        Vol,
+        Psy,
+        Insecte,
+        Roche,
+        Spectre,
+        Dragon,
+        Tenebre,
+        Acier,
+        Fee
     }
-
-    public enum TypeAction
-    {
-        Degats,
-        Soin,
-        Vampirisme
-    }
-
 }
 
-   

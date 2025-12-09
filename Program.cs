@@ -48,96 +48,32 @@ namespace PokemonBattle
 
         static void Main(string[] args)
         {
-  
+            // Créer les attaques pour Pikachu
             List<Attaque> attaquesPikachu = new List<Attaque>
             {
-                new Attaque("Tonnerre", TypeAction.Degats, 20),
-                new Attaque("Eclair", TypeAction.Degats, 10),
-                new Attaque("Plénitude", TypeAction.Soin, 30),
-                new Attaque("Vampirisme-Eclair", TypeAction.Vampirisme, 15)
+                new Attaque("Éclair", PokemonType.Electrique, 20, TypeAction.Degats),
+                new Attaque("Soin", PokemonType.Electrique, 15, TypeAction.Soin)
             };
 
-            List<Attaque> attaquesCarapuce = new List<Attaque>
+            // Créer les attaques pour Salamèche
+            List<Attaque> attaquesFlammèche = new List<Attaque>
             {
-                new Attaque("Pistolet à O", TypeAction.Degats, 18),
-                new Attaque("Hydrocanon", TypeAction.Degats, 25),
-                new Attaque("Repos", TypeAction.Soin, 40),
-                new Attaque("Vampirisme-Eau", TypeAction.Vampirisme, 12)
+                new Attaque("Flammèche", PokemonType.Feu, 25, TypeAction.Degats),
+                new Attaque("Vampirisme", PokemonType.Feu, 20, TypeAction.Vampirisme)
             };
 
-   
-            Pokemon monPokemon = new Pokemon("Pikachu", TypePokemon.Electrique, 100, 15, attaquesPikachu);
-            Pokemon pokemonAdverse = new Pokemon("Carapuce", TypePokemon.Eau, 100, 10, attaquesCarapuce);
+            // Créer les Pokémon
+            Pokemon pikachu = new Pokemon("Pikachu", PokemonType.Electrique, 100, 15, attaquesPikachu);
+            Pokemon salamèche = new Pokemon("Salamèche", PokemonType.Feu, 100, 18, attaquesFlammèche);
 
-            int tour = 1;
+            // Créer l'inventaire du joueur
+            Inventory inventaire = new Inventory();
+            inventaire.AddItem(new Potion(20), 3);
+            inventaire.AddItem(new Pokeball(0.4), 5);
 
-            Console.WriteLine($"--- Début du combat ---");
-            Console.WriteLine($"-> {monPokemon.Nom} de type {monPokemon.Type} est entré dans l'arène.");
-            Console.WriteLine($"-> {pokemonAdverse.Nom} de type {pokemonAdverse.Type} est entré dans l'arène.");
-            Console.WriteLine("------------------------------------------");
-
-            while (monPokemon.EstVivant && pokemonAdverse.EstVivant)
-            {
-                Console.WriteLine($"\n*** TOUR {tour} ***");
-
-                if (monPokemon.EstVivant)
-                {
-                    string nomAttaquePikachu = ChoisirAttaque(monPokemon);
-                    
-                    monPokemon.Attaquer(pokemonAdverse, nomAttaquePikachu);
-
-                    if (pokemonAdverse.EstVivant)
-                    {
-                        Console.WriteLine($"-> {pokemonAdverse.Nom} a {pokemonAdverse.Pv} PV.");
-                    }
-                    else
-                    {
-                        Console.WriteLine($"-> {pokemonAdverse.Nom} est tombé K.O. !");
-                        break;
-                    }
-                }
-
-                
-                if (pokemonAdverse.EstVivant)
-                {
-                    string nomAttaqueCarapuce;
-                    if (pokemonAdverse.Pv < 40) 
-                        nomAttaqueCarapuce = "Repos";
-                    else if (monPokemon.Type == TypePokemon.Electrique)
-                        nomAttaqueCarapuce = "Pistolet à O";
-                    else
-                        nomAttaqueCarapuce = "Hydrocanon";
-
-                    pokemonAdverse.Attaquer(monPokemon, nomAttaqueCarapuce);
-                    
-                    if (monPokemon.EstVivant)
-                    {
-                        Console.WriteLine($"-> {monPokemon.Nom} a {monPokemon.Pv} PV.");
-                    }
-                    else
-                    {
-                        Console.WriteLine($"-> {monPokemon.Nom} est tombé K.O. !");
-                    }
-                }
-
-                tour++;
-                Console.WriteLine("------------------------------------------");
-                Thread.Sleep(1500);
-            }
-
-            Console.WriteLine($"\n=== RÉSULTAT DU COMBAT ===");
-            if (monPokemon.EstVivant)
-            {
-                Console.WriteLine($"-> {monPokemon.Nom} a gagné ! Félicitations, vous avez vaincu {pokemonAdverse.Nom}.");
-            }
-            else if (pokemonAdverse.EstVivant)
-            {
-                Console.WriteLine($"-> {pokemonAdverse.Nom} a gagné ! Votre {monPokemon.Nom} est K.O.");
-            }
-            else
-            {
-                Console.WriteLine("Match nul ! Les deux Pokémon sont tombés K.O. en même temps.");
-            }
+            // Lancer le combat
+            Battle battle = new Battle(pikachu, salamèche, inventaire);
+            battle.Start();
         }
     }
 }
