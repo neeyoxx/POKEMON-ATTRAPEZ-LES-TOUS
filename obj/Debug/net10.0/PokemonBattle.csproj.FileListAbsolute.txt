@@ -1,0 +1,15 @@
+C:\Users\natha\Downloads\Pokemonbattle\POKEMON-ATTRAPEZ-LES-TOUS\bin\Debug\net10.0\PokemonBattle.exe
+C:\Users\natha\Downloads\Pokemonbattle\POKEMON-ATTRAPEZ-LES-TOUS\bin\Debug\net10.0\PokemonBattle.deps.json
+C:\Users\natha\Downloads\Pokemonbattle\POKEMON-ATTRAPEZ-LES-TOUS\bin\Debug\net10.0\PokemonBattle.runtimeconfig.json
+C:\Users\natha\Downloads\Pokemonbattle\POKEMON-ATTRAPEZ-LES-TOUS\bin\Debug\net10.0\PokemonBattle.dll
+C:\Users\natha\Downloads\Pokemonbattle\POKEMON-ATTRAPEZ-LES-TOUS\bin\Debug\net10.0\PokemonBattle.pdb
+C:\Users\natha\Downloads\Pokemonbattle\POKEMON-ATTRAPEZ-LES-TOUS\obj\Debug\net10.0\PokemonBattle.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\natha\Downloads\Pokemonbattle\POKEMON-ATTRAPEZ-LES-TOUS\obj\Debug\net10.0\PokemonBattle.AssemblyInfoInputs.cache
+C:\Users\natha\Downloads\Pokemonbattle\POKEMON-ATTRAPEZ-LES-TOUS\obj\Debug\net10.0\PokemonBattle.AssemblyInfo.cs
+C:\Users\natha\Downloads\Pokemonbattle\POKEMON-ATTRAPEZ-LES-TOUS\obj\Debug\net10.0\PokemonBattle.csproj.CoreCompileInputs.cache
+C:\Users\natha\Downloads\Pokemonbattle\POKEMON-ATTRAPEZ-LES-TOUS\obj\Debug\net10.0\PokemonBattle.sourcelink.json
+C:\Users\natha\Downloads\Pokemonbattle\POKEMON-ATTRAPEZ-LES-TOUS\obj\Debug\net10.0\PokemonBattle.dll
+C:\Users\natha\Downloads\Pokemonbattle\POKEMON-ATTRAPEZ-LES-TOUS\obj\Debug\net10.0\refint\PokemonBattle.dll
+C:\Users\natha\Downloads\Pokemonbattle\POKEMON-ATTRAPEZ-LES-TOUS\obj\Debug\net10.0\PokemonBattle.pdb
+C:\Users\natha\Downloads\Pokemonbattle\POKEMON-ATTRAPEZ-LES-TOUS\obj\Debug\net10.0\PokemonBattle.genruntimeconfig.cache
+C:\Users\natha\Downloads\Pokemonbattle\POKEMON-ATTRAPEZ-LES-TOUS\obj\Debug\net10.0\ref\PokemonBattle.dll

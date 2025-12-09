@@ -6,6 +6,9 @@ namespace PokemonBattle
 {
     public class Pokemon
     {
+        // On définit le maximum de PV ici pour pouvoir le réutiliser ailleurs (ex: Potion)
+        public const int MaxPv = 100;
+
         public string Nom { get; set; }
         public TypePokemon Type { get; set; }
         public int Pv { get; set; } 
@@ -24,6 +27,26 @@ namespace PokemonBattle
             Pv = pv;
             PuissanceAttaque = puissanceAttaque;
             Attaques = attaques;
+        }
+
+        // Nouvelle méthode centralisée pour le soin
+        public void Soigner(int montant)
+        {
+            Pv += montant;
+            if (Pv > MaxPv) 
+            {
+                Pv = MaxPv;
+            }
+        }
+
+        // Nouvelle méthode pour centraliser la gestion des dégâts
+        public void RecevoirDegats(int montant)
+        {
+            Pv -= montant;
+            if (Pv < 0)
+            {
+                Pv = 0;
+            }
         }
 
         private double CalculerMultiplicateurDegats(TypePokemon typeAttaque, TypePokemon typeCible)
@@ -47,7 +70,8 @@ namespace PokemonBattle
         {
             Attaque attaqueChoisie = Attaques.FirstOrDefault(a => a.Nom == nomAttaque);
             
-            if (attaqueChoisie.Nom == null)
+            // Vérification si l'attaque existe (si c'est une struct par défaut, Nom sera null)
+            if (string.IsNullOrEmpty(attaqueChoisie.Nom))
             {
                 Console.WriteLine($"-> {Nom} ne connaît pas l'attaque {nomAttaque} !");
                 return;
@@ -62,22 +86,21 @@ namespace PokemonBattle
             if (attaqueChoisie.Action == TypeAction.Soin)
             {
                 int montantSoin = attaqueChoisie.Puissance;
-                Pv += montantSoin;
-                if (Pv > 100) Pv = 100;
+                
+                // Utilisation de la nouvelle méthode Soigner
+                this.Soigner(montantSoin);
+
                 Console.WriteLine($"-> {Nom} utilise {attaqueChoisie.Nom} et se soigne de {montantSoin} PV.");
             }
             else
             {
+                // Calcul des dégâts
                 double multiplicateur = CalculerMultiplicateurDegats(this.Type, cible.Type);
                 int degatsBruts = this.PuissanceAttaque + attaqueChoisie.Puissance;
                 int degatsFinaux = (int)(degatsBruts * multiplicateur);
 
-                cible.Pv -= degatsFinaux;
-
-                if (cible.Pv < 0)
-                {
-                    cible.Pv = 0;
-                }
+                // Application des dégâts via la méthode dédiée
+                cible.RecevoirDegats(degatsFinaux);
 
                 string message = $"-> {Nom} utilise {attaqueChoisie.Nom} et inflige {degatsFinaux} dégâts à {cible.Nom}";
 
@@ -96,10 +119,11 @@ namespace PokemonBattle
                 
                 Console.WriteLine(message);
 
+                // Gestion du Vampirisme
                 if (attaqueChoisie.Action == TypeAction.Vampirisme)
                 {
                     int montantSoin = degatsFinaux / 2;
-                    Pv += montantSoin;
+                    this.Soigner(montantSoin); // Réutilisation de Soigner
                     Console.WriteLine($"-> {Nom} récupère {montantSoin} PV grâce à l'effet de vampirisme !");
                 }
             }
