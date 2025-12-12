@@ -6,11 +6,13 @@ namespace PokemonBattle
     {
         public string Nom { get; set; }
         public int MontantSoin { get; set; }
+        public int Cost { get; set; }
 
-        public Potion(int montantSoin = 20)
+        public Potion(int montantSoin = 20, int cost = 50)
         {
             Nom = $"Potion (+{montantSoin} PV)";
             MontantSoin = montantSoin;
+            Cost = cost;
         }
 
         public void Utiliser(Pokemon pokemon, Pokemon? ennemi = null)
@@ -22,7 +24,7 @@ namespace PokemonBattle
             }
 
             pokemon.Soigner(MontantSoin);
-            Console.WriteLine($"-> {pokemon.Nom} utilise Potion et récupère {MontantSoin} PV!");
+            Console.WriteLine($"-> {pokemon.Nom} utilise une Potion et récupère {MontantSoin} PV!");
         }
     }
 }

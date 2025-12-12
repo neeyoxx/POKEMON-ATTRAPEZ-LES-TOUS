@@ -6,11 +6,12 @@ namespace PokemonBattle
     {
         public string Nom { get; set; }
         public double TauxCapture { get; set; }
-
-        public Pokeball(double tauxCapture = 0.3)
+        public int Cost { get; set; }
+        public Pokeball(double tauxCapture = 0.3, int cost = 100)
         {
             Nom = "Pokéball";
             TauxCapture = tauxCapture;
+            Cost = cost;
         }
 
         public void Utiliser(Pokemon pokemon, Pokemon? ennemi = null)

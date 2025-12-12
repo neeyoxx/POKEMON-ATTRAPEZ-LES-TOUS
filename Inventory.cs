@@ -5,27 +5,36 @@ namespace PokemonBattle
 {
     public class Inventory
     {
-        public List<IItem> Items { get; set; }
+        public Dictionary<string, int> Items { get; set; }
 
         public Inventory()
         {
-            Items = new List<IItem>();
+            Items = new Dictionary<string, int>();
         }
-
-        public void AddItem(IItem item, int quantity = 1)
+        public void AddItem(string nomObjet, int quantity = 1)
         {
-            for (int i = 0; i < quantity; i++)
+            if (Items.ContainsKey(nomObjet))
             {
-                Items.Add(item);
+                Items[nomObjet] += quantity;
             }
-            Console.WriteLine($"-> {item.Nom} ajouté à l'inventaire ({quantity}x)");
+            else
+            {
+                Items[nomObjet] = quantity;
+            }
+            Console.WriteLine($"-> {nomObjet} x{quantity} ajouté(s) à l'inventaire.");
         }
 
-        public void RemoveItem(IItem item)
+        public void RemoveItem(string nomObjet, int quantity = 1)
         {
-            if (Items.Contains(item))
+            if (Items.ContainsKey(nomObjet))
             {
-                Items.Remove(item);
+                if (quantity <= 0) quantity = 1; 
+                
+                Items[nomObjet] -= quantity;
+                if (Items[nomObjet] <= 0)
+                {
+                    Items.Remove(nomObjet);
+                }
             }
         }
 
@@ -38,25 +47,13 @@ namespace PokemonBattle
                 return;
             }
 
-            var groupedItems = new Dictionary<string, int>();
-            foreach (var item in Items)
+            int index = 1;
+            foreach (var kvp in Items)
             {
-                if (groupedItems.ContainsKey(item.Nom))
-                    groupedItems[item.Nom]++;
-                else
-                    groupedItems[item.Nom] = 1;
-            }
-
-            foreach (var kvp in groupedItems)
-            {
-                Console.WriteLine($"- {kvp.Key} x{kvp.Value}");
+                Console.WriteLine($"{index}. {kvp.Key} x{kvp.Value}");
+                index++;
             }
             Console.WriteLine("==================\n");
-        }
-
-        public IItem? GetItemByName(string nom)
-        {
-            return Items.Find(i => i.Nom == nom);
         }
     }
 }
